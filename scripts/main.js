@@ -4,13 +4,7 @@ var $coffeeSize = $("[data-type='coffeeSize']");
 var $shotFlavor = $("[data-type='shotFlavor']");
 var $strengthLevel = $("[data-type='strengthLevel']");
 var $theForm = $('[data-coffee-order="form"]')
-var $page =
-// $coffeeOrder.on('input', function(event) {
-//     console.log($coffeeOrder.val());
-// })
-
-
-// localStorage.setItem('')
+// var recentLocalData = localStorage.getItem()
 
 //SUBMISSION
 $theForm.on('submit', function (event) {
@@ -31,11 +25,12 @@ $(window).on('load', function (event) {
 });
 
 
+var i = 0,
+    Orders = {},
+    sKey;
+for (; sKey = window.localStorage.key(i); i++) {
+    Orders[sKey] = window.localStorage.getItem(sKey);
+}
+console.log(Orders);
 
-    // localStorage.setItem('emailAddress', $emailAddress.val());
-    // localStorage.setItem('coffeeSize', $coffeSize.val());
-    // localStorage.setItem('shotFlavor', $shotFlavor.val());
-    // localStorage.setItem('strengthLevel', $strengthLevel.val());
-// });
-
-// })
+console.log(typeof Orders);
