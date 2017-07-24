@@ -26,9 +26,18 @@ $theForm.on('submit', function (event) {
     getServerData();
     sendDataToServer(recentOrder);
     drawData(recentOrder);
-// Posting truncated data to fit Chris's 
+    // $.get(URL, function(data) {
+    //     console.log(data);
+    deleteOrder(recentOrder.emailAddress);
 
 });
+
+// Posting truncated data to fit Chris's 
+    // console.log(recentOrderId["responseText"]);
+    // console.log(recentOrderId.responseText);
+    // getServerData();
+
+// });
 
 
 // PULL ORDER FROM LOCAL STORAGE
@@ -108,6 +117,37 @@ function drawData(data) {
         $table.append($tr);
         
     })
-    $listing.append($table);
-    
+    var $wrapperDiv = $('<div>');
+    var orderBox = $('<input type="checkbox" class="order-box"/>');
+    orderBox.on('click', function(event) {
+    var $target = $(event.target);
+    $target.closest('div').remove();
+});
+
+    $wrapperDiv
+        .append(orderBox)
+        .append($table)
+        .append('<br>')
+
+    $listing
+        .append($wrapperDiv)
 }
+
+function deleteOrder(id) {
+    return $.ajax( {
+        url: URL + '/' + id,
+        method: 'DELETE'
+    });
+}
+
+
+function deleteDom(item) {
+    var $existingOrders = $(ORDERS_LISTING_SELECTOR);
+    $existingOrders.remove(item);
+
+}
+
+
+
+
+getServerData();
